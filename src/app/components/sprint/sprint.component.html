@@ -1,0 +1,37 @@
+<div class="sprint__container">
+    <div class="sprint__header">
+        Sprints
+        <mat-icon matTooltip='exit'>close</mat-icon>
+    </div>
+
+    <div class="sprint__list">
+        <div class="sprint__list__item" *ngFor='let sprint of sprints'>
+            <div *ngIf='!sprint.editing'> {{sprint.name}} </div>
+            <mat-form-field *ngIf='sprint.editing' appearance="legacy">
+                <input matInput [(ngModel)]='sprint.name'>
+            </mat-form-field>
+
+            <div class='sprint__list__item__buttons'>
+                <mat-icon matTooltip='edit sprint' *ngIf='!sprint.editing' (click)='sprint.editing=true'>edit</mat-icon>
+                <mat-icon matTooltip='save sprint' *ngIf='sprint.editing' (click)='save(sprint)'>save</mat-icon>
+                <mat-icon matTooltip='remove sprint' (click)='remove(sprint)'>delete</mat-icon>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="sprint__add">
+        <mat-form-field appearance="legacy">
+            <mat-label>Crete New Sprint</mat-label>
+            <input matInput placeholder="new Spring" [formControl]='newSprint'>
+        </mat-form-field>
+
+        <button mat-mini-fab color="primary" (click)='addSprint()'>
+            <mat-icon>add</mat-icon>
+        </button>
+
+    </div>
+
+
+
+</div>
