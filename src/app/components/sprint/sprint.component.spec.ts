@@ -1,4 +1,10 @@
+import { CommonModule } from '@angular/common';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { provideMockStore } from '@ngrx/store/testing';
+import { MaterialModule } from 'src/app/material/material.module';
+import { initialState, selectSprints } from 'src/app/store/sprint/sprint.reducer';
 
 import { SprintComponent } from './sprint.component';
 
@@ -8,9 +14,17 @@ describe('SprintComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SprintComponent ]
+      declarations: [SprintComponent],
+      imports: [CommonModule, MaterialModule, BrowserAnimationsModule, FormsModule, ReactiveFormsModule],
+      providers: [provideMockStore({
+        initialState: {},
+        selectors: [
+          { selector: selectSprints, value: initialState }
+        ]
+
+      })]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
@@ -22,4 +36,5 @@ describe('SprintComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
 });

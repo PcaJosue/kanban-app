@@ -1,0 +1,37 @@
+<div class="member__container">
+    <div class="member__header">
+        members
+        <mat-icon matTooltip='exit'>close</mat-icon>
+    </div>
+
+    <div class="member__list">
+        <div class="member__list__item" *ngFor='let member of members'>
+            <div *ngIf='!member.editing'> {{member.name}} </div>
+            <mat-form-field *ngIf='member.editing' appearance="legacy">
+                <input matInput [(ngModel)]='member.name'>
+            </mat-form-field>
+
+            <div class='member__list__item__buttons'>
+                <mat-icon matTooltip='edit member' *ngIf='!member.editing' (click)='member.editing=true'>edit</mat-icon>
+                <mat-icon matTooltip='save member' *ngIf='member.editing' (click)='save(member)'>save</mat-icon>
+                <mat-icon matTooltip='remove member' (click)='remove(member)'>delete</mat-icon>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="member__add">
+        <mat-form-field appearance="legacy">
+            <mat-label>Crete New member</mat-label>
+            <input matInput placeholder="new Spring" [formControl]='newMember'>
+        </mat-form-field>
+
+        <button mat-mini-fab color="primary" (click)='addMember()'>
+            <mat-icon>add</mat-icon>
+        </button>
+
+    </div>
+
+
+
+</div>

@@ -23,6 +23,7 @@ export interface Step {
 }
 
 export interface Member {
-    name: string
+    name: string,
+    id: string
 }
 

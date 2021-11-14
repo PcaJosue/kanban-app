@@ -4,6 +4,8 @@ import { MatButtonModule } from '@angular/material/button'
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatSelectModule } from '@angular/material/select';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
     exports: [
@@ -11,7 +13,10 @@ import { MatTooltipModule } from '@angular/material/tooltip';
         MatButtonModule,
         MatFormFieldModule,
         MatInputModule,
-        MatTooltipModule
+        MatTooltipModule,
+        MatSelectModule,
+        DragDropModule
+
 
     ],
     providers: [],

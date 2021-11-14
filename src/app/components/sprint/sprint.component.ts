@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Store } from '@ngrx/store';
-import { Sprint } from 'src/app/store/model';
 import { createSprint, removeSprint, updateSprint } from 'src/app/store/sprint/sprint.actions';
 import { selectSprints } from 'src/app/store/sprint/sprint.reducer';
 
@@ -14,15 +13,14 @@ export class SprintComponent implements OnInit {
 
 
   newSprint = new FormControl('');
-  constructor(private store: Store) { }
+  constructor(public store: Store) { }
 
 
   sprints$ = this.store.select(selectSprints);
-  sprints: Sprint & { editing: boolean }[];
+  sprints: any;
 
   ngOnInit(): void {
     this.sprints$.subscribe(data => {
-      console.log('data', data);
       this.sprints = data.map(sprint => ({ ...sprint, editing: false }))
     })
   }
@@ -35,6 +33,7 @@ export class SprintComponent implements OnInit {
   remove(sprint) {
     sprint.editing = false;
     this.store.dispatch(removeSprint({ id: sprint.id }))
+
   }
 
   addSprint() {

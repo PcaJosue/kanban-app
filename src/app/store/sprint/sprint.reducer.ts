@@ -1,11 +1,28 @@
-import { createReducer, on } from "@ngrx/store";
+import { createFeatureSelector, createReducer, createSelector, on } from "@ngrx/store";
 import { Sprint } from "../model";
 import { createSprint, removeSprint, updateSprint } from "./sprint.actions";
 
 export const initialState: Sprint[] = [{
     id: '3434',
     name: 'Default',
-    toDo: [],
+    toDo: [
+        {
+            name: 'portafolio',
+            from: new Date(),
+            to: new Date(),
+            description: 'build portafolio',
+            steps: [],
+            member: [{ id: '123', name: 'Josue' }]
+        },
+        {
+            name: 'portafolio2',
+            from: new Date(),
+            to: new Date(),
+            description: 'build portafolio',
+            steps: [],
+            member: [{ id: '123', name: 'Josue' }]
+        }
+    ],
     progress: [],
     blocked: [],
     done: []
@@ -44,5 +61,4 @@ export const SprintReducer = createReducer(
 
 )
 
-
-export const selectSprints = (state: any) => state.sprints;
+export const selectSprints = createFeatureSelector<ReadonlyArray<Sprint>>('sprints');

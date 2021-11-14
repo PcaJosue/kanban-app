@@ -9,11 +9,17 @@ import { reducers } from './store/reducers';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SprintComponent } from './components/sprint/sprint.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MemberComponent } from './components/member/member.component';
+import { ResumeComponent } from './components/resume/resume.component';
+import { MainComponent } from './components/main/main.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SprintComponent
+    SprintComponent,
+    MemberComponent,
+    ResumeComponent,
+    MainComponent
   ],
   imports: [
     BrowserModule,

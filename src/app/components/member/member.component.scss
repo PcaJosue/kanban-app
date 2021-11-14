@@ -1,0 +1,57 @@
+.member {
+    &__container {
+        height: 48rem;
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__header {
+        height: 8%;
+        background-color: rgb(8, 8, 8);
+        display: flex;
+        color: #f2f2f2;
+        justify-content: center;
+        align-items: center;
+        font-size: 2rem;
+        position: relative;
+        mat-icon {
+            position: absolute;
+            top: 30%;
+            right: 1%;
+            cursor: pointer;
+        }
+    }
+
+    &__list {
+        display: flex;
+        flex-direction: column;
+        height: 75%;
+        overflow: auto;
+        gap: 1rem;
+        padding: 2px;
+
+        &__item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 1rem;
+            font-size: 1.2rem;
+            border: 1px solid rgba(128, 128, 128, 0.192);
+            box-shadow: 3px 5px #88888834;
+
+            &__buttons {
+                mat-icon {
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+
+    &__add {
+        padding: 1rem;
+        display: flex;
+        gap: 2rem;
+        justify-content: center;
+        align-items: center;
+    }
+}

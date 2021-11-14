@@ -1,0 +1,67 @@
+.main {
+    &__header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 3.5rem;
+        background-color: rgb(8, 8, 8);
+        color: #f2f2f2;
+        font-size: 1.5rem;
+        position: relative;
+        .mat-icon {
+            position: absolute;
+            top: 30%;
+            right: 1%;
+            cursor: pointer;
+        }
+    }
+
+    &__actions {
+        padding: 0 5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    &__table {
+        margin: 1rem;
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+
+        &__todo,
+        &__progress,
+        &__blocked,
+        &__done {
+            width: 23%;
+        }
+    }
+}
+
+.title {
+    background-color: rgb(8, 8, 8);
+    color: #f2f2f2;
+    height: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.box {
+    border-bottom: solid 1px #ccc;
+    color: rgba(0, 0, 0, 0.87);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    cursor: move;
+    background: white;
+    font-size: 14px;
+}
+
+.content {
+    height: 70vh;
+}
