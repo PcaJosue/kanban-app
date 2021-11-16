@@ -6,6 +6,11 @@ import { MatInputModule } from '@angular/material/input';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSelectModule } from '@angular/material/select';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatNativeDateModule } from "@angular/material/core";
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
     exports: [
@@ -15,9 +20,12 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
         MatInputModule,
         MatTooltipModule,
         MatSelectModule,
-        DragDropModule
-
-
+        DragDropModule,
+        MatDialogModule,
+        MatDatepickerModule,
+        MatCheckboxModule,
+        MatNativeDateModule,
+        MatSnackBarModule
     ],
     providers: [],
 })

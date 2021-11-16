@@ -9,6 +9,7 @@ const onCreateMember = (state, { name }) => {
     newState.push({
         id: '' + new Date().getTime(),
         name: name,
+        selected: false
     });
     return newState;
 }

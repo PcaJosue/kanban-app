@@ -5,15 +5,15 @@
         <mat-icon>settings</mat-icon>
     </div>
     <div class="main__actions">
-        <button mat-raised-button color="primary">
+        <button mat-raised-button color="primary" (click)='openCreateTask()'>
             <mat-icon>add</mat-icon>
             <span>CREATE TASK</span>
         </button>
 
         <mat-form-field appearance="standard">
             <mat-label>Sprints</mat-label>
-            <mat-select [(ngModel)]="sprintSelected">
-                <mat-option *ngFor="let sprint of sprints$ | async" [value]="sprint">{{sprint.name}}</mat-option>
+            <mat-select [(ngModel)]="idSelected">
+                <mat-option *ngFor="let sprint of sprints$ | async" [value]="sprint.id">{{sprint.name}}</mat-option>
             </mat-select>
         </mat-form-field>
 
@@ -23,28 +23,32 @@
         <div class="main__table__todo">
             <div class="title">To Do</div>
             <div class="content" cdkDropList #todoList="cdkDropList" [cdkDropListData]="sprintSelected.toDo"
-                [cdkDropListConnectedTo]="[progressList,blockedList,doneList]" (cdkDropListDropped)="drop($event)">
+                [cdkDropListConnectedTo]="[progressList,blockedList,doneList]"
+                (cdkDropListDropped)="drop($event,'toDo')">
                 <div class='box' *ngFor="let item of sprintSelected.toDo" cdkDrag>{{item.name}}</div>
             </div>
         </div>
         <div class="main__table__progress">
             <div class="title">Progress</div>
             <div class="content" cdkDropList #progressList="cdkDropList" [cdkDropListData]="sprintSelected.progress"
-                [cdkDropListConnectedTo]="[todoList,blockedList,doneList]" (cdkDropListDropped)="drop($event)">
+                [cdkDropListConnectedTo]="[todoList,blockedList,doneList]"
+                (cdkDropListDropped)="drop($event,'progress')">
                 <div class='box' *ngFor="let item of sprintSelected.progress" cdkDrag>{{item.name}}</div>
             </div>
         </div>
         <div class="main__table__blocked">
             <div class="title">Blocked</div>
             <div class="content" cdkDropList #blockedList="cdkDropList" [cdkDropListData]="sprintSelected.blocked"
-                [cdkDropListConnectedTo]="[todoList,progressList,doneList]" (cdkDropListDropped)="drop($event)">
+                [cdkDropListConnectedTo]="[todoList,progressList,doneList]"
+                (cdkDropListDropped)="drop($event,'blocked')">
                 <div class='box' *ngFor="let item of sprintSelected.blocked" cdkDrag>{{item.name}}</div>
             </div>
         </div>
         <div class="main__table__done">
             <div class="title">Done</div>
             <div class="content" cdkDropList #doneList="cdkDropList" [cdkDropListData]="sprintSelected.done"
-                [cdkDropListConnectedTo]="[todoList,progressList,blockedList]" (cdkDropListDropped)="drop($event)">
+                [cdkDropListConnectedTo]="[todoList,progressList,blockedList]"
+                (cdkDropListDropped)="drop($event,'done')">
                 <div class='box' *ngFor="let item of sprintSelected.done" cdkDrag>{{item.name}}</div>
             </div>
         </div>

@@ -24,6 +24,7 @@ export interface Step {
 
 export interface Member {
     name: string,
-    id: string
+    id: string,
+    selected: boolean
 }
 

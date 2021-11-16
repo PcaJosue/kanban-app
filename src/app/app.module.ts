@@ -12,6 +12,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MemberComponent } from './components/member/member.component';
 import { ResumeComponent } from './components/resume/resume.component';
 import { MainComponent } from './components/main/main.component';
+import { TaskComponent } from './components/task/task.component';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { MainComponent } from './components/main/main.component';
     SprintComponent,
     MemberComponent,
     ResumeComponent,
-    MainComponent
+    MainComponent,
+    TaskComponent
   ],
   imports: [
     BrowserModule,
