@@ -6,7 +6,7 @@ import { Store } from '@ngrx/store';
 import { createMember } from 'src/app/store/member/member.actions';
 import { selectMembers } from 'src/app/store/member/member.reducer';
 import { Member, Task } from 'src/app/store/model';
-import { addTask } from 'src/app/store/sprint/sprint.actions';
+import { addTask, updateTask } from 'src/app/store/sprint/sprint.actions';
 
 @Component({
   selector: 'app-task',
@@ -26,9 +26,12 @@ export class TaskComponent implements OnInit {
     private _snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
-    if (this.data.task) { }
+    if (this.data.task) {
+      this.task = JSON.parse(JSON.stringify(this.data.task));
+    }
     else {
       this.task = {
+        id: new Date().getTime(),
         name: null,
         from: new Date(),
         to: null,
@@ -36,10 +39,15 @@ export class TaskComponent implements OnInit {
         steps: [],
         member: []
       }
-      this.store.select(selectMembers).subscribe(members => {
-        this.task.member = JSON.parse(JSON.stringify(members))
-      })
     }
+
+    this.store.select(selectMembers).subscribe(members => {
+      const ids = this.task.member.filter(m => m.selected).map(m => m.id);
+      this.task.member = JSON.parse(JSON.stringify(members))
+      this.task.member.forEach(m => {
+        if (ids.includes(m.id)) m.selected = true;
+      })
+    })
   }
 
   addStep() {
@@ -48,11 +56,6 @@ export class TaskComponent implements OnInit {
     this.newStep.reset();
   }
 
-  addMember() {
-    if (!this.newMember.value || this.newMember.value.trim().length === 0) return;
-    this.store.dispatch(createMember({ name: this.newMember.value }))
-    this.newMember.reset();
-  }
 
   checkError(): boolean {
 
@@ -66,7 +69,8 @@ export class TaskComponent implements OnInit {
 
   save() {
     if (this.checkError()) return;
-    this.store.dispatch(addTask({ task: this.task, id: this.data.id }))
+    if (this.data.task) this.store.dispatch(updateTask({ task: this.task, id: this.data.id }))
+    else this.store.dispatch(addTask({ task: this.task, id: this.data.id }))
     this.dialogRef.close();
 
   }

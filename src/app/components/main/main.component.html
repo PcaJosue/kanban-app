@@ -2,7 +2,11 @@
 
     <div class="main__header">
         <h1>PERSONAL KANBAN</h1>
-        <mat-icon>settings</mat-icon>
+        <mat-icon mat-button [matMenuTriggerFor]="menu">settings</mat-icon>
+        <mat-menu #menu="matMenu">
+            <button mat-menu-item (click)='sprints()'>Sprints</button>
+            <button mat-menu-item (click)='members()'>Members</button>
+        </mat-menu>
     </div>
     <div class="main__actions">
         <button mat-raised-button color="primary" (click)='openCreateTask()'>
@@ -12,7 +16,7 @@
 
         <mat-form-field appearance="standard">
             <mat-label>Sprints</mat-label>
-            <mat-select [(ngModel)]="idSelected">
+            <mat-select [(ngModel)]="idSelected" (selectionChange)='changeSprint()'>
                 <mat-option *ngFor="let sprint of sprints$ | async" [value]="sprint.id">{{sprint.name}}</mat-option>
             </mat-select>
         </mat-form-field>
@@ -25,7 +29,8 @@
             <div class="content" cdkDropList #todoList="cdkDropList" [cdkDropListData]="sprintSelected.toDo"
                 [cdkDropListConnectedTo]="[progressList,blockedList,doneList]"
                 (cdkDropListDropped)="drop($event,'toDo')">
-                <div class='box' *ngFor="let item of sprintSelected.toDo" cdkDrag>{{item.name}}</div>
+                <app-resume class='box' cdkDrag *ngFor="let item of sprintSelected.toDo" [task]='item'
+                    [sprintId]='idSelected'></app-resume>
             </div>
         </div>
         <div class="main__table__progress">
@@ -33,7 +38,8 @@
             <div class="content" cdkDropList #progressList="cdkDropList" [cdkDropListData]="sprintSelected.progress"
                 [cdkDropListConnectedTo]="[todoList,blockedList,doneList]"
                 (cdkDropListDropped)="drop($event,'progress')">
-                <div class='box' *ngFor="let item of sprintSelected.progress" cdkDrag>{{item.name}}</div>
+                <app-resume class='box' cdkDrag *ngFor="let item of sprintSelected.progress" [task]='item'
+                    [sprintId]='idSelected'></app-resume>
             </div>
         </div>
         <div class="main__table__blocked">
@@ -41,7 +47,8 @@
             <div class="content" cdkDropList #blockedList="cdkDropList" [cdkDropListData]="sprintSelected.blocked"
                 [cdkDropListConnectedTo]="[todoList,progressList,doneList]"
                 (cdkDropListDropped)="drop($event,'blocked')">
-                <div class='box' *ngFor="let item of sprintSelected.blocked" cdkDrag>{{item.name}}</div>
+                <app-resume class='box' cdkDrag *ngFor="let item of sprintSelected.blocked" [task]='item'
+                    [sprintId]='idSelected'></app-resume>
             </div>
         </div>
         <div class="main__table__done">
@@ -49,7 +56,8 @@
             <div class="content" cdkDropList #doneList="cdkDropList" [cdkDropListData]="sprintSelected.done"
                 [cdkDropListConnectedTo]="[todoList,progressList,blockedList]"
                 (cdkDropListDropped)="drop($event,'done')">
-                <div class='box' *ngFor="let item of sprintSelected.done" cdkDrag>{{item.name}}</div>
+                <app-resume class='box' cdkDrag *ngFor="let item of sprintSelected.done" [task]='item'
+                    [sprintId]='idSelected'></app-resume>
             </div>
         </div>
     </div>

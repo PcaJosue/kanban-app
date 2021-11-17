@@ -1,4 +1,4 @@
-import { createFeatureSelector, createReducer, createSelector, on } from "@ngrx/store";
+import { createFeatureSelector, createReducer, on } from "@ngrx/store";
 import { Member, Sprint } from "../model";
 import { createMember, removeMember, updateMember } from "./member.actions";
 
@@ -25,9 +25,17 @@ const onRemoveMember = (state, { id }) => {
     return state.filter(member => member.id !== id)
 }
 
+const getInitialState = () => {
+    let initial: any = localStorage.getItem('members');
+    if (initial) initial = JSON.parse(initial)
+    else initial = initialState
+
+    return initial
+}
+
 
 export const MemberReducer = createReducer(
-    initialState,
+    getInitialState(),
     on(createMember, onCreateMember),
     on(updateMember, onUpdateMember),
     on(removeMember, onRemoveMember)

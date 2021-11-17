@@ -1,28 +1,11 @@
 import { createFeatureSelector, createReducer, createSelector, on } from "@ngrx/store";
 import { Sprint } from "../model";
-import { addTask, createSprint, removeSprint, updateSprint, updateSprintList } from "./sprint.actions";
+import { addTask, createSprint, removeSprint, updateSprint, updateSprintList, updateTask } from "./sprint.actions";
 
 export const initialState: Sprint[] = [{
-    id: '3434',
+    id: new Date().getTime().toString(),
     name: 'Default',
-    toDo: [
-        {
-            name: 'portafolio',
-            from: new Date(),
-            to: new Date(),
-            description: 'build portafolio',
-            steps: [],
-            member: [{ id: '123', name: 'Josue', selected: false }]
-        },
-        {
-            name: 'portafolio2',
-            from: new Date(),
-            to: new Date(),
-            description: 'build portafolio',
-            steps: [],
-            member: [{ id: '123', name: 'Josue', selected: false }]
-        }
-    ],
+    toDo: [],
     progress: [],
     blocked: [],
     done: []
@@ -68,15 +51,41 @@ const onAddTask = (state, { task, id }) => {
     return sprints
 }
 
+const onUpdateTask = (state, { task, id }) => {
+    const sprint: Sprint = JSON.parse(JSON.stringify(state.filter(s => s.id === id)[0]))
+    const sprints: Sprint[] = JSON.parse(JSON.stringify(state.filter(s => s.id !== id)))
+    const lists = ['toDo', 'progress', 'blocked', 'done']
+
+
+    for (let key of lists) {
+        let foundTaskIndex = Array(...sprint[key]).findIndex(t => t.id === task.id)
+        if (foundTaskIndex >= 0) {
+            sprint[key][foundTaskIndex] = task;
+            break;
+        }
+    }
+    sprints.push(sprint);
+    return sprints;
+}
+
+const getInitialState = () => {
+    let initial: any = localStorage.getItem('sprints');
+    if (initial) initial = JSON.parse(initial)
+    else initial = initialState
+
+    return initial
+}
 
 export const SprintReducer = createReducer(
-    initialState,
+    getInitialState(),
     on(createSprint, onCreateSprint),
     on(updateSprint, onUpdateSprint),
     on(removeSprint, onRemoveSprint),
     on(updateSprintList, onUpdateSprintList),
-    on(addTask, onAddTask)
+    on(addTask, onAddTask),
+    on(updateTask, onUpdateTask),
 
 )
 
 export const selectSprints = createFeatureSelector<ReadonlyArray<Sprint>>('sprints');
+

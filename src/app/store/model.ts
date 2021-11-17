@@ -8,6 +8,7 @@ export interface Sprint {
 }
 
 export interface Task {
+    id: number
     name: string
     from: Date
     to: Date

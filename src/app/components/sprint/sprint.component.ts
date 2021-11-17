@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { createSprint, removeSprint, updateSprint } from 'src/app/store/sprint/sprint.actions';
 import { selectSprints } from 'src/app/store/sprint/sprint.reducer';
@@ -13,7 +14,9 @@ export class SprintComponent implements OnInit {
 
 
   newSprint = new FormControl('');
-  constructor(public store: Store) { }
+  constructor(public store: Store,
+    public dialogRef: MatDialogRef<SprintComponent>
+  ) { }
 
 
   sprints$ = this.store.select(selectSprints);

@@ -3,55 +3,48 @@
         <span>Task</span>
         <mat-icon matDialogClose>close</mat-icon>
     </div>
-    <div class="task__dates">
-        <span><b>From: </b>{{task.from | date}}</span>
-        <mat-form-field appearance="legacy">
-            <mat-label>End date</mat-label>
-            <input matInput [matDatepicker]="picker" [(ngModel)]='task.to'>
-            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-            <mat-datepicker #picker></mat-datepicker>
-        </mat-form-field>
-    </div>
-    <div class="task__info">
-        <mat-form-field appearance="legacy">
-            <mat-label>Name</mat-label>
-            <input matInput [(ngModel)]='task.name'>
-        </mat-form-field>
-        <mat-form-field appearance="legacy">
-            <mat-label>Description</mat-label>
-            <textarea rows="5" matInput placeholder="Ex. It makes me feel..." [(ngModel)]='task.description'></textarea>
-        </mat-form-field>
-    </div>
-    <div class="task__steps">
-        <b>Steps</b>
-        <mat-checkbox color='primary' *ngFor='let step of task.steps' [(ngModel)]='step.done'>{{step.name}}
-        </mat-checkbox>
-        <div class='task__steps__actions'>
+    <div class="task__content">
+        <div class="task__dates">
+            <span><b>From: </b>{{task.from | date}}</span>
             <mat-form-field appearance="legacy">
-                <mat-label>Crete New step</mat-label>
-                <input matInput placeholder="new Step" [formControl]='newStep'>
+                <mat-label>End date</mat-label>
+                <input matInput [matDatepicker]="picker" [(ngModel)]='task.to'>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
-
-            <button mat-mini-fab color="primary" (click)='addStep()'>
-                <mat-icon>add</mat-icon>
-            </button>
-
         </div>
-    </div>
-    <div class="task__members">
-        <b>Members</b>
-        <mat-checkbox color='primary' *ngFor='let member of task.member' [(ngModel)]='member.selected'>{{member.name}}
-        </mat-checkbox>
-        <div class='task__members__actions'>
+        <div class="task__info">
             <mat-form-field appearance="legacy">
-                <mat-label>Crete New Member</mat-label>
-                <input matInput placeholder="new member" [formControl]='newMember'>
+                <mat-label>Name</mat-label>
+                <input matInput [(ngModel)]='task.name'>
             </mat-form-field>
+            <mat-form-field appearance="legacy">
+                <mat-label>Description</mat-label>
+                <textarea rows="5" matInput placeholder="Ex. It makes me feel..."
+                    [(ngModel)]='task.description'></textarea>
+            </mat-form-field>
+        </div>
+        <div class="task__steps">
+            <b>Steps</b>
+            <mat-checkbox color='primary' *ngFor='let step of task.steps' [(ngModel)]='step.done'>{{step.name}}
+            </mat-checkbox>
+            <div class='task__steps__actions'>
+                <mat-form-field appearance="legacy">
+                    <mat-label>Crete New step</mat-label>
+                    <input matInput placeholder="new Step" [formControl]='newStep'>
+                </mat-form-field>
 
-            <button mat-mini-fab color="primary" (click)='addMember()'>
-                <mat-icon>add</mat-icon>
-            </button>
+                <button mat-mini-fab color="primary" (click)='addStep()'>
+                    <mat-icon>add</mat-icon>
+                </button>
 
+            </div>
+        </div>
+        <div class="task__members">
+            <b>Members</b>
+            <mat-checkbox color='primary' *ngFor='let member of task.member' [(ngModel)]='member.selected'>
+                {{member.name}}
+            </mat-checkbox>
         </div>
     </div>
     <div class="task__actions">

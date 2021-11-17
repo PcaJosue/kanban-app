@@ -1,6 +1,5 @@
 .sprint {
     &__container {
-        height: 48rem;
         display: flex;
         flex-direction: column;
     }
@@ -25,7 +24,7 @@
     &__list {
         display: flex;
         flex-direction: column;
-        height: 75%;
+        height: 65vh;
         overflow: auto;
         gap: 1rem;
         padding: 2px;

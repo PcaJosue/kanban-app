@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { createMember, removeMember, updateMember } from 'src/app/store/member/member.actions';
 import { selectMembers } from 'src/app/store/member/member.reducer';
@@ -13,7 +14,8 @@ export class MemberComponent implements OnInit {
 
 
   newMember = new FormControl('');
-  constructor(public store: Store) { }
+  constructor(public store: Store,
+    public dialogRef: MatDialogRef<MemberComponent>) { }
 
 
   members$ = this.store.select(selectMembers);
