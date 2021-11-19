@@ -14,7 +14,7 @@ export class SprintComponent implements OnInit {
 
 
   newSprint = new FormControl('');
-  constructor(public store: Store,
+  constructor(private store: Store,
     public dialogRef: MatDialogRef<SprintComponent>
   ) { }
 

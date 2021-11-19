@@ -14,15 +14,15 @@ export class ResumeComponent implements OnInit {
   @Input('sprintId') id: string;
   progress: number;
   members: Member[];
-  constructor(public dialog: MatDialog) { }
+  constructor(private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.calculateProgress()
-    this.members = this.task.member.filter(m => m.selected)
+    this.members = this.task?.member.filter(m => m.selected)
   }
 
   calculateProgress() {
-    this.progress = (this.task.steps.filter(step => step.done).length / this.task.steps.length) * 100
+    this.progress = (this.task?.steps.filter(step => step.done).length / this.task?.steps.length) * 100
   }
 
   seeTask() {

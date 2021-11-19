@@ -1,18 +1,18 @@
 <div class='resume'>
     <div class="resume__header">
-        <h3>{{task.name | titlecase}}</h3>
+        <h3>{{task?.name | titlecase}}</h3>
         <mat-icon (click)='seeTask()'>visibility</mat-icon>
     </div>
     <div class="resume__dates">
-        <span>From: {{task.from | date}}</span>
-        <span *ngIf='task.to'>To: {{task.to | date}}</span>
+        <span>From: {{task?.from | date}}</span>
+        <span *ngIf='task?.to'>To: {{task?.to | date}}</span>
     </div>
     <div class="resume__description">
-        {{task.description.substring(0,100)}}
+        {{task?.description.substring(0,100)}}
     </div>
     <div class="resume__footer">
         <div>
-            <span style='color:#6200EE' *ngIf='task.steps.length>0'>{{progress | number : '1.2-2'}}%</span>
+            <span style='color:#6200EE' *ngIf='task?.steps.length>0'>{{progress | number : '1.2-2'}}%</span>
         </div>
         <div class='resume__footer__members'>
             <ng-container *ngFor='let member of members;let i = index'>

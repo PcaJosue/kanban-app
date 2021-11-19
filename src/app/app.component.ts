@@ -13,7 +13,6 @@ export class AppComponent implements OnInit {
 
   ngOnInit() {
     this.store.subscribe((data: any) => {
-      console.log('call');
       localStorage.setItem('members', JSON.stringify(data.members))
       localStorage.setItem('sprints', JSON.stringify(data.sprints))
     })

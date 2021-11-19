@@ -3,9 +3,8 @@ import { FormControl } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Store } from '@ngrx/store';
-import { createMember } from 'src/app/store/member/member.actions';
 import { selectMembers } from 'src/app/store/member/member.reducer';
-import { Member, Task } from 'src/app/store/model';
+import { Task } from 'src/app/store/model';
 import { addTask, updateTask } from 'src/app/store/sprint/sprint.actions';
 
 @Component({
@@ -27,7 +26,8 @@ export class TaskComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.data.task) {
-      this.task = JSON.parse(JSON.stringify(this.data.task));
+      const dataString = JSON.stringify(this.data.task)
+      this.task = JSON.parse(dataString);
     }
     else {
       this.task = {
@@ -40,13 +40,19 @@ export class TaskComponent implements OnInit {
         member: []
       }
     }
+    this.selectMembers();
+  }
 
+  selectMembers() {
     this.store.select(selectMembers).subscribe(members => {
-      const ids = this.task.member.filter(m => m.selected).map(m => m.id);
-      this.task.member = JSON.parse(JSON.stringify(members))
-      this.task.member.forEach(m => {
-        if (ids.includes(m.id)) m.selected = true;
-      })
+      if (members) {
+        const ids = this.task.member.filter(m => m.selected).map(m => m.id);
+        const memberString = JSON.stringify(members);
+        this.task.member = JSON.parse(memberString)
+        this.task.member.forEach(m => {
+          if (ids.includes(m.id)) m.selected = true;
+        })
+      }
     })
   }
 
