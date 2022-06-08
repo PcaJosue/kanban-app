@@ -8,7 +8,7 @@
         <span *ngIf='task?.to'>To: {{task?.to | date}}</span>
     </div>
     <div class="resume__description">
-        {{task?.description.substring(0,100)}}
+        {{task?.description?.substring(0,100)}}
     </div>
     <div class="resume__footer">
         <div>
