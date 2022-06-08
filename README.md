@@ -60,6 +60,6 @@ A quick look at the top-level files and directories included with this template.
 
 14. **`tsconfig.spec.json`**: This is a TypeScript configuration file aimed for application testing.
 
-15. ** run `npm build --prod`
+15. ** run `npm build --base=href "https://PcaJosue.github.io/kanban-app/"`
 
 16. ** deploy `npx angular-cli-ghpages --dir=dist/intro-storybook-angular-template`
