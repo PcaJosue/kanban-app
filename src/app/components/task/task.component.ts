@@ -5,7 +5,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Store } from '@ngrx/store';
 import { selectMembers } from 'src/app/store/member/member.reducer';
 import { Task } from 'src/app/store/model';
-import { addTask, updateTask } from 'src/app/store/sprint/sprint.actions';
+import { addTask, removeTask, updateTask } from 'src/app/store/sprint/sprint.actions';
 
 @Component({
   selector: 'app-task',
@@ -77,6 +77,12 @@ export class TaskComponent implements OnInit {
     if (this.checkError()) return;
     if (this.data.task) this.store.dispatch(updateTask({ task: this.task, id: this.data.id }))
     else this.store.dispatch(addTask({ task: this.task, id: this.data.id }))
+    this.dialogRef.close();
+
+  }
+
+  deleteTask(){
+    this.store.dispatch(removeTask({ task: this.task, id: this.data.id }))
     this.dialogRef.close();
 
   }

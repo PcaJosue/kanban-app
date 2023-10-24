@@ -1,5 +1,8 @@
 <div class="task">
     <div class="task__header">
+        <button *ngIf="data?.task" mat-raised-button color="primary" (click)='deleteTask()'>
+          <mat-icon>delete</mat-icon>
+         </button>
         <span>Task</span>
         <mat-icon matDialogClose>close</mat-icon>
     </div>

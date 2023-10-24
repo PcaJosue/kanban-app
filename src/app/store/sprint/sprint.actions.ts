@@ -7,7 +7,8 @@ export enum sprintActionTypes {
     "remove" = '[Sprint] remove',
     "Update List" = '[Sprint] update list',
     "add task" = '[Sprint] add task',
-    "update task" = '[Sprint] update task'
+    "update task" = '[Sprint] update task',
+    "remove task" = '[Sprint] remove task',
 }
 
 
@@ -17,3 +18,4 @@ export const removeSprint = createAction(sprintActionTypes.remove, props<{ id: s
 export const updateSprintList = createAction(sprintActionTypes["Update List"], props<{ sprint: Sprint }>())
 export const addTask = createAction(sprintActionTypes["add task"], props<{ task: Task, id: string }>())
 export const updateTask = createAction(sprintActionTypes["update task"], props<{ task: Task, id: string }>())
+export const removeTask = createAction(sprintActionTypes["remove task"], props<{  task: Task, id: string }>())

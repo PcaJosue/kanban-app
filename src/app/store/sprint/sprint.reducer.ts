@@ -1,6 +1,6 @@
-import { createFeatureSelector, createReducer, createSelector, on } from "@ngrx/store";
+import { createFeatureSelector, createReducer, on } from "@ngrx/store";
 import { Sprint } from "../model";
-import { addTask, createSprint, removeSprint, updateSprint, updateSprintList, updateTask } from "./sprint.actions";
+import { addTask, createSprint, removeSprint, updateSprint, updateSprintList, updateTask,removeTask } from "./sprint.actions";
 
 export const initialState: Sprint[] = [{
     id: new Date().getTime().toString(),
@@ -41,6 +41,22 @@ const onUpdateSprintList = (state, { sprint }) => {
     const sprints = state.filter(s => s.id !== sprint.id)
     sprints.push(sprint)
     return sprints
+}
+
+const onRemoveTask = (state, { task,id }) => {
+  const sprint: Sprint = JSON.parse(JSON.stringify(state.filter(s => s.id === id)[0]))
+  const sprints: Sprint[] = JSON.parse(JSON.stringify(state.filter(s => s.id !== id)))
+  const lists = ['toDo', 'progress', 'blocked', 'done']
+
+    for (let key of lists) {
+        let foundTaskIndex = Array(...sprint[key]).findIndex(t => t.id === task.id)
+        if (foundTaskIndex >= 0) {
+            sprint[key].splice(foundTaskIndex,1);
+            break;
+        }
+    }
+    sprints.push(sprint);
+    return sprints;
 }
 
 const onAddTask = (state, { task, id }) => {
@@ -84,6 +100,7 @@ export const SprintReducer = createReducer(
     on(updateSprintList, onUpdateSprintList),
     on(addTask, onAddTask),
     on(updateTask, onUpdateTask),
+    on(removeTask,onRemoveTask)
 
 )
 
